@@ -1,23 +1,55 @@
 import { Request, Response } from "express";
+import { createMenuObject } from "../helpers/createMenuObject";
+import { Pet } from "../models/pet";
+export const home = (req: Request, res: Response) => {
+    let list = Pet.getAll();
+  res.render("pages/page", {
+    banner: {
+      menu: createMenuObject(""),
+      title: "Todos os animains",
+      background: "allanimals.jpg",
+    },
+    list
 
-export const home = (req: Request, res: Response)=>{
+  });
+};
 
-    res.send('home no controllerr')
+export const dogs = (req: Request, res: Response) => {
+    let list = Pet.getFromType('dog');
+  res.render("pages/page", {
+    banner: {
+      menu: createMenuObject("dog"),
 
+      title: "Todos os cachorros",
+      background: "banner_dog.jpg",
 
-}
-export const dogs = (req: Request, res: Response)=>{
-    res.send('dgos no controllerr')
+    },
+    list
+  });
+};
+export const cats = (req: Request, res: Response) => {
+    let list = Pet.getFromType('cat');
 
+  res.render("pages/page", {
+    banner: {
+      menu: createMenuObject("cat"),
 
-}
-export const cats = (req: Request, res: Response)=>{
-    res.send('cats no controllerr')
+      title: "Todos os gatos",
+      background: "banner_cat.jpg",
+    },
+    list
+  });
+};
+export const fishes = (req: Request, res: Response) => {
+    let list = Pet.getFromType('fish');
 
+  res.render("pages/page", {
+    banner: {
+      menu: createMenuObject("fish"),
 
-}
-export const fishes = (req: Request, res: Response)=>{
-    res.send('fishes no controllerr')
-
-
-}
+      title: "Todos os peixes",
+      background: "banner_fish.jpg",
+    },
+    list
+  });
+};
